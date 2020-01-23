@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export, consistent-return, import/no-extraneous-dependencies */
 import * as path from "path";
 import * as Mocha from "mocha";
 import * as glob from "glob";
@@ -29,8 +30,8 @@ export function run(): Promise<void> {
             c();
           }
         });
-      } catch (err) {
-        e(err);
+      } catch (error) {
+        e(error);
       }
     });
   });

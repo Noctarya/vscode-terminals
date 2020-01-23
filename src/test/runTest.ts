@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import * as path from "path";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { runTests } from "vscode-test";
 
 async function main() {
