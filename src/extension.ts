@@ -20,6 +20,8 @@ export const activate = (context: vscode.ExtensionContext) => {
     refreshTerminalItems(context);
   });
 
+  vscode.workspace.onDidChangeConfiguration(() => refreshTerminalItems(context));
+
   context.subscriptions.push(
     vscode.commands.registerCommand('terminal-statusbar.createTerminal', () => {
       const newTerminal = vscode.window.createTerminal();

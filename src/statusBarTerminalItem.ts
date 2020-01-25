@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { getConfig } from './configService';
 
 let curId = 0;
 const getNextCommandId = () => `terminal-statusbar.anonymous-command.${curId++}`;
@@ -10,7 +11,16 @@ export default class StatusBarTerminalItem {
   constructor(idx: number, terminal: vscode.Terminal) {
     this._item = vscode.window.createStatusBarItem();
     this._terminal = terminal;
-    this._item.text = `$(terminal)${idx + 1}`;
+    const config = getConfig();
+    this._item.text = `$(terminal)${
+      config.showTerminalIndex && config.showTerminalName
+        ? `${idx + 1}: ${terminal.name}`
+        : config.showTerminalIndex
+        ? idx + 1
+        : config.showTerminalName
+        ? terminal.name
+        : ''
+    }`;
   }
 
   public registerAndShow(context: vscode.ExtensionContext): void {

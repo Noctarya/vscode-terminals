@@ -19,7 +19,25 @@
         "command": "terminal-statusbar.createTerminal",
         "title": "Create Terminal"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Terminal StatusBar",
+      "properties": {
+        "terminalStatusBar.showTerminalIndex": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Shows the terminal index next to the icon in the status bar.",
+          "scope": "resource"
+        },
+        "terminalStatusBar.showTerminalName": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Shows the terminal name next to the icon in the status bar",
+          "scope": "resource"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
