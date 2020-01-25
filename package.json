@@ -30,6 +30,11 @@
           "markdownDescription": "Maximum number of icons displayed.",
           "scope": "resource"
         },
+        "terminalStatusBar.preferLatestTerminals": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Prefer the latest terminals if the maximum number of displayed icons is exceeded."
+        },
         "terminalStatusBar.showTerminalIndex": {
           "type": "boolean",
           "default": true,
