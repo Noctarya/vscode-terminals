@@ -24,6 +24,12 @@
       "type": "object",
       "title": "Terminal StatusBar",
       "properties": {
+        "terminalStatusBar.maxTerminalIcons": {
+          "type": "number",
+          "default": 15,
+          "markdownDescription": "Maximum number of icons displayed.",
+          "scope": "resource"
+        },
         "terminalStatusBar.showTerminalIndex": {
           "type": "boolean",
           "default": true,

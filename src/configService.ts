@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 export interface TerminalStatusBarConfig {
+  maxTerminalIcons: number;
   showTerminalIndex: boolean;
   showTerminalName: boolean;
 }
