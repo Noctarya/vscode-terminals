@@ -16,8 +16,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.helloWorld",
-        "title": "Hello World"
+        "command": "terminal-statusbar.createTerminal",
+        "title": "Create Terminal"
       }
     ]
   },

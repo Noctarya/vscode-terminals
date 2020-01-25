@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-// eslint-disable-next-line import/no-unresolved
 import StatusBarTerminalItem from './statusBarTerminalItem';
 
 let knownTerminalItems: StatusBarTerminalItem[] = [];
@@ -22,8 +21,9 @@ export const activate = (context: vscode.ExtensionContext) => {
   });
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.helloWorld', () => {
-      vscode.window.showInformationMessage('Hello World!');
+    vscode.commands.registerCommand('terminal-statusbar.createTerminal', () => {
+      const newTerminal = vscode.window.createTerminal();
+      newTerminal.show();
     })
   );
 
