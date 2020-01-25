@@ -14,5 +14,11 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "prettier"],
-  "rules": {}
+  "rules": {
+    "import/no-unresolved": [2, { "ignore": ["^vscode$"] }],
+    "import/extensions": ["error", "never"],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-plusplus": "off"
+  }
 }
