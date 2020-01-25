@@ -1,16 +1,27 @@
 {
   "name": "terminal-statusbar",
-  "displayName": "Terminal StatusBar",
-  "description": "",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.41.0"
   },
+  "displayName": "Terminal StatusBar",
+  "description": "Adds icons for each terminal process to the status bar.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Noctarya/vscode-terminal-statusbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Noctarya/vscode-terminal-statusbar/issues"
+  },
+  "icon": "img/logo.png",
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "*"
+  "keywords": [
+    "terminal",
+    "terminals",
+    "statusbar"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -44,12 +55,15 @@
         "terminalStatusBar.showTerminalName": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Shows the terminal name next to the icon in the status bar",
+          "markdownDescription": "Shows the terminal name next to the icon in the status bar.",
           "scope": "resource"
         }
       }
     }
   },
+  "activationEvents": [
+    "*"
+  ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
