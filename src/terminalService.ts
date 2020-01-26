@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-// eslint-disable-next-line no-unused-vars
-import { getConfig, StartupTerminal } from './configService';
+import StartupTerminal from './config/startupTerminal';
+import ConfigService from './configService';
 
 export default class TerminalService {
   public static initializeStartupTerminals = () => {
-    getConfig().startupTerminals.forEach(st => TerminalService.openStartupTerminal(st));
+    ConfigService.startupTerminals.forEach(st => TerminalService.openStartupTerminal(st));
   };
 
   private static openStartupTerminal(terminal: StartupTerminal) {

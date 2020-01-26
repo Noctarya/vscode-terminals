@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { getConfig } from './configService';
 import StatusBarTerminalItem from './statusBarTerminalItem';
+import ConfigService from './configService';
 
 interface IndexedTerminal {
   index: number;
@@ -11,16 +11,16 @@ let knownTerminalItems: StatusBarTerminalItem[] = [];
 
 const getTerminals = (): IndexedTerminal[] => {
   const allTerminals = vscode.window.terminals.map((t, idx) => ({ index: idx, terminal: t }));
-  return allTerminals.length <= getConfig().maxTerminalIcons
+  return allTerminals.length <= ConfigService.maxTerminalIcons
     ? allTerminals
-    : getConfig().preferLatestTerminals
-    ? allTerminals.filter((t, idx) => idx >= vscode.window.terminals.length - getConfig().maxTerminalIcons)
-    : allTerminals.filter((t, idx) => idx < getConfig().maxTerminalIcons);
+    : ConfigService.preferLatestTerminals
+    ? allTerminals.filter((t, idx) => idx >= vscode.window.terminals.length - ConfigService.maxTerminalIcons)
+    : allTerminals.filter((t, idx) => idx < ConfigService.maxTerminalIcons);
 };
 
 const onNewTerminal = (context: vscode.ExtensionContext, terminal: vscode.Terminal) => {
-  if (!getConfig().preferLatestTerminals && knownTerminalItems.length >= getConfig().maxTerminalIcons) return;
-  if (getConfig().preferLatestTerminals && knownTerminalItems.length >= getConfig().maxTerminalIcons && knownTerminalItems.length > 0) {
+  if (!ConfigService.preferLatestTerminals && knownTerminalItems.length >= ConfigService.maxTerminalIcons) return;
+  if (ConfigService.preferLatestTerminals && knownTerminalItems.length >= ConfigService.maxTerminalIcons && knownTerminalItems.length > 0) {
     knownTerminalItems[0].dispose();
     knownTerminalItems = knownTerminalItems.filter((t, idx) => idx > 0);
   }

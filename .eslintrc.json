@@ -16,6 +16,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "import/no-unresolved": "off",
+    "no-unused-vars": "off",
     "import/extensions": ["error", "never"],
     "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
