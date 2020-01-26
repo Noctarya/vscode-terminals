@@ -1,6 +1,6 @@
 {
   "name": "terminal-statusbar",
-  "version": "0.2.0-dev",
+  "version": "0.2.0",
   "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.41.0"
