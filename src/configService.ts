@@ -21,7 +21,8 @@ export default class ConfigService {
       ConfigService.getAndValidateShowTerminalIndex(),
       ConfigService.getAndValidateShowTerminalName(),
       ConfigService.getAndValidatePreferLatestTerminals(),
-      ConfigService.getAndValidateStartupTerminals()
+      ConfigService.getAndValidateStartupTerminals(),
+      ConfigService.getAndValidateCloseExistingTerminalsOnStartup()
     );
     LoggingService.info('Configuration currently used:', ConfigService.config);
   }
@@ -80,6 +81,15 @@ export default class ConfigService {
     );
   }
 
+  private static getAndValidateCloseExistingTerminalsOnStartup(): boolean {
+    const value = getVsConfig('closeExistingTerminalsOnStartup');
+    if (ConfigService.validator.isBoolean(value)) return value;
+    LoggingService.warn('terminalStatusBar.closeExistingTerminalsOnStartup is not a valid boolean. Use Default instead.', {
+      'terminalStatusBar.closeExistingTerminalsOnStartup': value
+    });
+    return false;
+  }
+
   public static get maxTerminalIcons(): number {
     return ConfigService.config.maxTerminalIcons;
   }
@@ -98,5 +108,9 @@ export default class ConfigService {
 
   public static get startupTerminals(): StartupTerminal[] {
     return ConfigService.config.startupTerminals;
+  }
+
+  public static get closeExistingTerminalsOnStartup(): boolean {
+    return ConfigService.config.closeExistingTerminalsOnStartup;
   }
 }

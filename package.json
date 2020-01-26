@@ -29,6 +29,10 @@
       {
         "command": "terminal-statusbar.createTerminal",
         "title": "Create Terminal"
+      },
+      {
+        "command": "terminal-statusbar.closeAllTerminals",
+        "title": "Close All Terminals"
       }
     ],
     "configuration": {
