@@ -33,6 +33,10 @@
       {
         "command": "terminal-statusbar.closeAllTerminals",
         "title": "Close All Terminals"
+      },
+      {
+        "command": "terminal-statusbar.closeActiveTerminal",
+        "title": "Close Active Terminal"
       }
     ],
     "configuration": {

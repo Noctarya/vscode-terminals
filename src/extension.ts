@@ -19,6 +19,8 @@ export const activate = (context: vscode.ExtensionContext) => {
 
   context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.closeAllTerminals', () => TerminalService.closeAllTerminals()));
 
+  context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.closeActiveTerminal', () => TerminalService.closeActiveTerminal()));
+
   StatusBarTerminalService.refreshTerminalItems(context);
   TerminalService.initializeStartupTerminals();
 };

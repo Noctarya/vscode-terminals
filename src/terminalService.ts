@@ -21,6 +21,16 @@ export default class TerminalService {
     newTerminal.show();
   }
 
+  public static closeActiveTerminal() {
+    const terminal = vscode.window.activeTerminal;
+    if (terminal) {
+      LoggingService.info(`Close active terminal ${terminal.name}`);
+      terminal.dispose();
+    } else {
+      LoggingService.warn('No active terminal detected. Command "Close Active Termin" abort.');
+    }
+  }
+
   public static closeAllTerminals() {
     vscode.window.terminals.forEach((t, idx) => {
       LoggingService.info(`Close terminal ${idx + 1}: ${t.name}.`);

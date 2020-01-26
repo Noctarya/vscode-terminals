@@ -8,10 +8,11 @@ Adds icons for each terminal process to the status bar.
 
 ## Commands
 
-| Command             | Description                            |
-| ------------------- | -------------------------------------- |
-| Create Terminal     | Create a new terminal                  |
-| Close All Terminals | Close all existing terminal processes. |
+| Command               | Description                                   |
+| --------------------- | --------------------------------------------- |
+| Create Terminal       | Create a new terminal.                        |
+| Close All Terminals   | Close all existing terminal processes.        |
+| Close Active Terminal | Closes the currently active terminal process. |
 
 ## Configuration
 
