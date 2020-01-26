@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import statusBarTerminalService from './statusBarTerminalService';
+import TerminalService from './terminalService';
 
 export const activate = (context: vscode.ExtensionContext) => {
   vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => statusBarTerminalService.onNewTerminal(context, terminal));
@@ -16,6 +17,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   );
 
   statusBarTerminalService.refreshTerminalItems(context);
+  TerminalService.initializeStartupTerminals();
 };
 
 export const deactivate = () => {};

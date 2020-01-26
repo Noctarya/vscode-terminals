@@ -1,6 +1,6 @@
 {
   "name": "terminal-statusbar",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.41.0"
@@ -56,6 +56,23 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Shows the terminal name next to the icon in the status bar.",
+          "scope": "resource"
+        },
+        "terminalStatusBar.startupTerminals": {
+          "type": "array",
+          "default": [],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "startupCommand": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "markdownDescription": "Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup.",
           "scope": "resource"
         }
       }
