@@ -13,6 +13,8 @@ export default class TerminalService {
       LoggingService.info('Create startup terminal:', terminal);
       const newTerminal = vscode.window.createTerminal(terminal.id);
       if (terminal.startupCommand) newTerminal.sendText(terminal.startupCommand);
+    } else {
+      LoggingService.warn(`A terminal process with the name ${terminal.id} already exists. The following terminal is not created:`, terminal);
     }
   }
 

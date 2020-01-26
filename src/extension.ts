@@ -5,7 +5,7 @@ import ConfigService from './configService';
 import LoggingService from './loggingService';
 
 export const activate = (context: vscode.ExtensionContext) => {
-  vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => StatusBarTerminalService.onNewTerminal(context, terminal));
+  vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => StatusBarTerminalService.refreshTerminalItems(context));
 
   vscode.window.onDidCloseTerminal(() => StatusBarTerminalService.refreshTerminalItems(context));
 
@@ -21,8 +21,8 @@ export const activate = (context: vscode.ExtensionContext) => {
 
   context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.closeActiveTerminal', () => TerminalService.closeActiveTerminal()));
 
-  StatusBarTerminalService.refreshTerminalItems(context);
   TerminalService.initializeStartupTerminals();
+  StatusBarTerminalService.refreshTerminalItems(context);
 };
 
 export const deactivate = () => {};
