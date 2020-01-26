@@ -24,6 +24,6 @@ export default class LoggingService {
   }
 
   private static logObject(data: object): void {
-    LoggingService.outputChannel.appendLine(`  value: ${JSON.stringify(data)}`);
+    LoggingService.outputChannel.appendLine(`  ${JSON.stringify(data)}`);
   }
 }

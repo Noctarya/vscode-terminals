@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import statusBarTerminalService from './statusBarTerminalService';
 import TerminalService from './terminalService';
 import ConfigService from './configService';
+import LoggingService from './loggingService';
 
 export const activate = (context: vscode.ExtensionContext) => {
   vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => statusBarTerminalService.onNewTerminal(context, terminal));
@@ -9,6 +10,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   vscode.window.onDidCloseTerminal(() => statusBarTerminalService.refreshTerminalItems(context));
 
   vscode.workspace.onDidChangeConfiguration(() => {
+    LoggingService.info('Configuration changes detected. Update configuration.');
     ConfigService.refreshConfig();
     statusBarTerminalService.refreshTerminalItems(context);
   });

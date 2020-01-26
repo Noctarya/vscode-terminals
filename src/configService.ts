@@ -23,43 +23,51 @@ export default class ConfigService {
       ConfigService.getAndValidatePreferLatestTerminals(),
       ConfigService.getAndValidateStartupTerminals()
     );
+    LoggingService.info('Configuration currently used:', ConfigService.config);
   }
 
   private static getAndValidateMaxTerminalIcons(): number {
     const value = getVsConfig('maxTerminalIcons');
     if (ConfigService.validator.isInt(value) && ConfigService.validator.min(value, 0) && ConfigService.validator.max(value, 99)) return value;
-    LoggingService.warn('terminalStatusBar.maxTerminalIcons is not a valid number between 0 and 99. Use Default instead.', value);
+    LoggingService.warn('terminalStatusBar.maxTerminalIcons is not a valid number between 0 and 99. Use Default instead.', {
+      'terminalStatusBar.maxTerminalIcons': value
+    });
     return 15;
   }
 
   private static getAndValidateShowTerminalIndex(): boolean {
     const value = getVsConfig('showTerminalIndex');
     if (ConfigService.validator.isBoolean(value)) return value;
-    LoggingService.warn('terminalStatusBar.showTerminalIndex is not a valid boolean. Use Default instead.', value);
+    LoggingService.warn('terminalStatusBar.showTerminalIndex is not a valid boolean. Use Default instead.', {
+      'terminalStatusBar.showTerminalIndex': value
+    });
     return true;
   }
 
   private static getAndValidateShowTerminalName(): boolean {
     const value = getVsConfig('showTerminalName');
     if (ConfigService.validator.isBoolean(value)) return value;
-    LoggingService.warn('terminalStatusBar.showTerminalName is not a valid boolean. Use Default instead.', value);
+    LoggingService.warn('terminalStatusBar.showTerminalName is not a valid boolean. Use Default instead.', {
+      'terminalStatusBar.showTerminalName': value
+    });
     return false;
   }
 
   private static getAndValidatePreferLatestTerminals(): boolean {
     const value = getVsConfig('preferLatestTerminals');
     if (ConfigService.validator.isBoolean(value)) return value;
-    LoggingService.warn('terminalStatusBar.preferLatestTerminals is not a valid boolean. Use Default instead.', value);
+    LoggingService.warn('terminalStatusBar.preferLatestTerminals is not a valid boolean. Use Default instead.', {
+      'terminalStatusBar.preferLatestTerminals': value
+    });
     return false;
   }
 
   private static getAndValidateStartupTerminals(): StartupTerminal[] {
     const value = getVsConfig('startupTerminals');
     if (ConfigService.validator.isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t))) return value;
-    LoggingService.warn(
-      'terminalStatusBar.startupTerminals is not a valid array of { id: string, startupCommand?: string }. Use Default instead.',
-      value
-    );
+    LoggingService.warn('terminalStatusBar.startupTerminals is not a valid array of { id: string, startupCommand?: string }. Use Default instead.', {
+      'terminalStatusBar.startupTerminals': value
+    });
     return [];
   }
 
