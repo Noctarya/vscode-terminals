@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import ConfigService from './configService';
 
 let curId = 0;
-const getNextCommandId = () => `terminal-statusbar.anonymous-command.${curId++}`;
+const getNextCommandId = () => `extendedTerminalIntegration.anonymous-command.${curId++}`;
 
 export default class StatusBarTerminalItem {
   private _item: vscode.StatusBarItem;

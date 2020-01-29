@@ -1,18 +1,18 @@
 {
-  "name": "terminal-statusbar",
-  "version": "0.2.0",
+  "name": "terminals",
+  "version": "0.3.0-dev",
   "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.41.0"
   },
-  "displayName": "Terminal StatusBar",
+  "displayName": "Extended Terminal Integration",
   "description": "Adds icons for each terminal process to the status bar.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Noctarya/vscode-terminal-statusbar.git"
+    "url": "https://github.com/Noctarya/vscode-terminals.git"
   },
   "bugs": {
-    "url": "https://github.com/Noctarya/vscode-terminal-statusbar/issues"
+    "url": "https://github.com/Noctarya/vscode-terminals/issues"
   },
   "icon": "img/logo.png",
   "categories": [
@@ -27,46 +27,46 @@
   "contributes": {
     "commands": [
       {
-        "command": "terminal-statusbar.createTerminal",
+        "command": "extendedTerminalIntegration.createTerminal",
         "title": "Create Terminal"
       },
       {
-        "command": "terminal-statusbar.closeAllTerminals",
+        "command": "extendedTerminalIntegration.closeAllTerminals",
         "title": "Close All Terminals"
       },
       {
-        "command": "terminal-statusbar.closeActiveTerminal",
+        "command": "extendedTerminalIntegration.closeActiveTerminal",
         "title": "Close Active Terminal"
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "Terminal StatusBar",
+      "title": "Extended Terminal Integration",
       "properties": {
-        "terminalStatusBar.maxTerminalIcons": {
+        "extendedTerminalIntegration.maxTerminalIcons": {
           "type": "number",
           "default": 15,
           "markdownDescription": "Maximum number of icons displayed.",
           "scope": "resource"
         },
-        "terminalStatusBar.preferLatestTerminals": {
+        "extendedTerminalIntegration.preferLatestTerminals": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Prefer the latest terminals if the maximum number of displayed icons is exceeded."
         },
-        "terminalStatusBar.showTerminalIndex": {
+        "extendedTerminalIntegration.showTerminalIndex": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Shows the terminal index next to the icon in the status bar.",
           "scope": "resource"
         },
-        "terminalStatusBar.showTerminalName": {
+        "extendedTerminalIntegration.showTerminalName": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Shows the terminal name next to the icon in the status bar.",
           "scope": "resource"
         },
-        "terminalStatusBar.startupTerminals": {
+        "extendedTerminalIntegration.startupTerminals": {
           "type": "array",
           "default": [],
           "properties": {

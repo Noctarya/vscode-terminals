@@ -1,4 +1,4 @@
-# <img src="./img/logo.png"  height="45" width="45" align="center"> Terminal StatusBar
+# <img src="./img/logo.png"  height="45" width="45" align="center"> Extended Terminal Integration
 
 Adds icons for each terminal process to the status bar.
 
@@ -16,7 +16,7 @@ Adds icons for each terminal process to the status bar.
 
 ## Configuration
 
-### Prefix: terminalStatusBar
+### Prefix: extendedTerminalIntegration
 
 | Property              | Typ                                        | Description                                                                                                                                                                                 |
 | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -30,11 +30,11 @@ Adds icons for each terminal process to the status bar.
 
 ```
 {
-  "terminalStatusBar.maxTerminalIcons": 3,
-  "terminalStatusBar.preferLatestTerminals": true,
-  "terminalStatusBar.showTerminalIndex": false
-  "terminalStatusBar.showTerminalName": false,
-  "terminalStatusBar.startupTerminals": [
+  "extendedTerminalIntegration.maxTerminalIcons": 3,
+  "extendedTerminalIntegration.preferLatestTerminals": true,
+  "extendedTerminalIntegration.showTerminalIndex": false
+  "extendedTerminalIntegration.showTerminalName": false,
+  "extendedTerminalIntegration.startupTerminals": [
     {
       "id": "devServer",
       "startupCommand": "npm run dev"

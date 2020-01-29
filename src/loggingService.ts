@@ -3,7 +3,7 @@ import { window } from 'vscode';
 type LogLevel = 'INFO' | 'WARN' | 'ERROR';
 
 export default class LoggingService {
-  private static outputChannel = window.createOutputChannel('Terminal StatusBar');
+  private static outputChannel = window.createOutputChannel('Extended Terminal Integration');
 
   public static info(message: string, data?: object): void {
     LoggingService.logMessage('INFO', message, data);

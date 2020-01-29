@@ -15,11 +15,15 @@ export const activate = (context: vscode.ExtensionContext) => {
     StatusBarTerminalService.refreshTerminalItems(context);
   });
 
-  context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.createTerminal', () => TerminalService.createTerminal()));
+  context.subscriptions.push(vscode.commands.registerCommand('extendedTerminalIntegration.createTerminal', () => TerminalService.createTerminal()));
 
-  context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.closeAllTerminals', () => TerminalService.closeAllTerminals()));
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extendedTerminalIntegration.closeAllTerminals', () => TerminalService.closeAllTerminals())
+  );
 
-  context.subscriptions.push(vscode.commands.registerCommand('terminal-statusbar.closeActiveTerminal', () => TerminalService.closeActiveTerminal()));
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extendedTerminalIntegration.closeActiveTerminal', () => TerminalService.closeActiveTerminal())
+  );
 
   TerminalService.initializeStartupTerminals();
   StatusBarTerminalService.refreshTerminalItems(context);
