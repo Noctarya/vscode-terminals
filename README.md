@@ -18,13 +18,14 @@ Adds icons for each terminal process to the status bar.
 
 ### Prefix: extendedTerminalIntegration
 
-| Property              | Typ                                        | Description                                                                                                                                                                                 |
-| --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| maxTerminalIcons      | number                                     | Maximum number of icons displayed.                                                                                                                                                          |
-| preferLatestTerminals | boolean                                    | Prefer the latest terminals if the maximum number of displayed icons is exceeded.                                                                                                           |
-| showTerminalIndex     | boolean                                    | Shows the terminal index next to the icon in the status bar.                                                                                                                                |
-| showTerminalName      | boolean                                    | Shows the terminal name next to the icon in the status bar.                                                                                                                                 |
-| startupTerminals      | [ { id: string, startupCommand?: string} ] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
+| Property                    | Typ                                        | Description                                                                                                                                                                                 |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| maxTerminalIcons            | number                                     | Maximum number of icons displayed.                                                                                                                                                          |
+| preferLatestTerminals       | boolean                                    | Prefer the latest terminals if the maximum number of displayed icons is exceeded.                                                                                                           |
+| showTerminalIndex           | boolean                                    | Shows the terminal index next to the icon in the status bar.                                                                                                                                |
+| showTerminalName            | boolean                                    | Shows the terminal name next to the icon in the status bar.                                                                                                                                 |
+| startupTerminals            | [ { id: string, startupCommand?: string} ] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
+| refreshTerminalNameInterval | number                                     | Time in seconds until the terminal name is updated.                                                                                                                                         |
 
 ### Example
 
@@ -39,6 +40,7 @@ Adds icons for each terminal process to the status bar.
       "id": "devServer",
       "startupCommand": "npm run dev"
     }
-  ]
+  ],
+  "extendedTerminalIntegration.refreshTerminalNameInterval": 2
 }
 ```

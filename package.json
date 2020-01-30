@@ -1,6 +1,6 @@
 {
   "name": "terminals",
-  "version": "0.3.0",
+  "version": "0.3.1-dev",
   "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.41.0"
@@ -81,6 +81,12 @@
             "id"
           ],
           "markdownDescription": "Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup.",
+          "scope": "resource"
+        },
+        "extendedTerminalIntegration.refreshTerminalNameInterval": {
+          "type": "number",
+          "default": 5,
+          "markdownDescription": "Time in seconds until the terminal name is updated.",
           "scope": "resource"
         }
       }

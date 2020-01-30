@@ -21,7 +21,8 @@ export default class ConfigService {
       ConfigService.getAndValidateShowTerminalIndex(),
       ConfigService.getAndValidateShowTerminalName(),
       ConfigService.getAndValidatePreferLatestTerminals(),
-      ConfigService.getAndValidateStartupTerminals()
+      ConfigService.getAndValidateStartupTerminals(),
+      ConfigService.getAndValidateRefreshTerminalNameInterval()
     );
     LoggingService.info('Configuration currently used:', ConfigService.config);
   }
@@ -83,6 +84,15 @@ export default class ConfigService {
     );
   }
 
+  private static getAndValidateRefreshTerminalNameInterval(): number {
+    const value = getVsConfig('refreshTerminalNameInterval');
+    if (ConfigService.validator.isInt(value) && ConfigService.validator.min(value, 1) && ConfigService.validator.max(value, 600)) return value;
+    LoggingService.warn('extendedTerminalIntegration.refreshTerminalNameInterval is not a valid number between 1 and 600. Use Default instead.', {
+      'extendedTerminalIntegration.refreshTerminalNameInterval': value
+    });
+    return 5;
+  }
+
   public static get maxTerminalIcons(): number {
     return ConfigService.config.maxTerminalIcons;
   }
@@ -101,5 +111,9 @@ export default class ConfigService {
 
   public static get startupTerminals(): StartupTerminal[] {
     return ConfigService.config.startupTerminals;
+  }
+
+  public static get refreshTerminalNameInterval(): number {
+    return ConfigService.config.refreshTerminalNameInterval;
   }
 }

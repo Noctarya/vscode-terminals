@@ -9,18 +9,21 @@ export default class Config {
   public readonly showTerminalName: boolean;
   public readonly preferLatestTerminals: boolean;
   public readonly startupTerminals: StartupTerminal[];
+  public readonly refreshTerminalNameInterval: number;
 
   constructor(
     maxTerminalIcons: number,
     showTerminalIndex: boolean,
     showTerminalName: boolean,
     preferLatestTerminals: boolean,
-    startupTerminals: StartupTerminal[]
+    startupTerminals: StartupTerminal[],
+    refreshTerminalNameInterval: number
   ) {
     this.maxTerminalIcons = maxTerminalIcons;
     this.showTerminalIndex = showTerminalIndex;
     this.showTerminalName = showTerminalName;
     this.preferLatestTerminals = preferLatestTerminals;
     this.startupTerminals = startupTerminals;
+    this.refreshTerminalNameInterval = refreshTerminalNameInterval;
   }
 }

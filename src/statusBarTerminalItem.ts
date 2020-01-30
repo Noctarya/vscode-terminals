@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import ConfigService from './configService';
+import LoggingService from './loggingService';
 
 let curId = 0;
 const getNextCommandId = () => `extendedTerminalIntegration.anonymous-command.${curId++}`;
@@ -7,20 +8,30 @@ const getNextCommandId = () => `extendedTerminalIntegration.anonymous-command.${
 export default class StatusBarTerminalItem {
   private _item: vscode.StatusBarItem;
   private _terminal: vscode.Terminal;
+  private _idx: number;
+  private _refreshIntervalId: NodeJS.Timeout | null;
 
   constructor(idx: number, terminal: vscode.Terminal) {
     this._item = vscode.window.createStatusBarItem();
     this._terminal = terminal;
+    this._idx = idx + 1;
+    this._refreshIntervalId = null;
+    this.refreshName();
+  }
+
+  private refreshName = () => {
+    if (this._refreshIntervalId) clearInterval(this._refreshIntervalId);
     this._item.text = `$(terminal)${
       ConfigService.showTerminalIndex && ConfigService.showTerminalName
-        ? `${idx + 1}: ${terminal.name}`
+        ? `${this._idx}: ${this._terminal.name}`
         : ConfigService.showTerminalIndex
-        ? idx + 1
+        ? this._idx
         : ConfigService.showTerminalName
-        ? terminal.name
+        ? this._terminal.name
         : ''
     }`;
-  }
+    this._refreshIntervalId = setInterval(this.refreshName, ConfigService.refreshTerminalNameInterval * 1000);
+  };
 
   public registerAndShow(context: vscode.ExtensionContext): void {
     this.registerCommand(context);
@@ -38,6 +49,7 @@ export default class StatusBarTerminalItem {
   }
 
   public dispose(): void {
+    if (this._refreshIntervalId) clearInterval(this._refreshIntervalId);
     this._item.dispose();
   }
 }
