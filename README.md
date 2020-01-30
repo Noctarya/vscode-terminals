@@ -6,6 +6,12 @@ Adds icons for each terminal process to the status bar.
 
 ![Preview with index and name](./img/preview_withIndexAndName.png)
 
+### Please note:
+
+This extension is currently still under development. Therefore, commands or configuration parameters may no longer exist or be renamed in the future.
+
+The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0. The reason for that is the extension shouldn't only take care of the display of the open terminal processes in the status bar. Rather, it is intended to provide general tools and improvements relating to terminal integration in VS Code. An example of this is the possibility of startupTerminals. The current ID will definitely be retained in the future.
+
 ## Commands
 
 | Command               | Description                                   |
