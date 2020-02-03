@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import ConfigService from './configService';
-import LoggingService from './loggingService';
+import ConfigService from '../services/configService';
+import LoggingService from '../services/loggingService';
 
 let curId = 0;
 const getNextCommandId = () => `extendedTerminalIntegration.anonymous-command.${curId++}`;
@@ -14,7 +14,7 @@ export default class StatusBarTerminalItem {
   constructor(idx: number, terminal: vscode.Terminal) {
     this._item = vscode.window.createStatusBarItem();
     this._terminal = terminal;
-    this._idx = idx + 1;
+    this._idx = idx;
     this._refreshIntervalId = null;
     this.refreshName();
   }

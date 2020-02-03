@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import StartupTerminal from './config/startupTerminal';
+import StartupTerminal from '../config/startupTerminal';
 import ConfigService from './configService';
 import LoggingService from './loggingService';
 

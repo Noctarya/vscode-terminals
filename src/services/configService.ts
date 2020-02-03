@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { validate, Validator } from 'class-validator';
 import LoggingService from './loggingService';
-import Config from './config';
-import StartupTerminal from './config/startupTerminal';
+import Config from '../config';
+import StartupTerminal from '../config/startupTerminal';
 
 const getVsConfig = (property: string) => vscode.workspace.getConfiguration('extendedTerminalIntegration')[property];
 
