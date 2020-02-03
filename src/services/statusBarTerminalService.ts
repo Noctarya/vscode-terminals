@@ -11,11 +11,17 @@ export default class StatusBarTerminalService {
   private static knownTerminalItems: StatusBarTerminalItem[] = [];
 
   private static getTerminals = (): IndexedTerminal[] => {
-    const allTerminals = vscode.window.terminals.map((t, idx) => ({ index: idx, terminal: t }));
+    const allTerminals = vscode.window.terminals
+      .map((t, idx) => ({ index: idx, terminal: t }))
+      .filter(t =>
+        ConfigService.filterMode === 'blacklist'
+          ? !ConfigService.filterItems.includes(t.terminal.name)
+          : ConfigService.filterItems.includes(t.terminal.name)
+      );
     return allTerminals.length <= ConfigService.maxTerminalIcons
       ? allTerminals
       : ConfigService.preferLatestTerminals
-      ? allTerminals.filter((t, idx) => idx >= vscode.window.terminals.length - ConfigService.maxTerminalIcons)
+      ? allTerminals.filter((t, idx) => idx >= allTerminals.length - ConfigService.maxTerminalIcons)
       : allTerminals.filter((t, idx) => idx < ConfigService.maxTerminalIcons);
   };
 

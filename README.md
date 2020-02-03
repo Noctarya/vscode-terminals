@@ -24,9 +24,9 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
 
 ### Prefix: extendedTerminalIntegration
 
-| Property         | Typ                                        | Description                                                                                                                                                                                 |
-| ---------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| startupTerminals | [ { id: string, startupCommand?: string} ] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
+| Property         | Typ                                      | Description                                                                                                                                                                                 |
+| ---------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| startupTerminals | { id: string, startupCommand?: string}[] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
 
 ### Prefix: extendedTerminalIntegration.statusBar
 
@@ -37,6 +37,13 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
 | showTerminalIndex           | boolean | Shows the terminal index next to the icon in the status bar.                      |
 | showTerminalName            | boolean | Shows the terminal name next to the icon in the status bar.                       |
 | refreshTerminalNameInterval | number  | Time in seconds until the terminal name is updated.                               |
+
+### Prefix: extendedTerminalIntegration.statusBar.filter
+
+| Property | Typ                        | Description                                  |
+| -------- | -------------------------- | -------------------------------------------- |
+| mode     | 'blacklist' or 'whitelist' | The type of filtering mode.                  |
+| items    | string[]                   | The items that should be used for filtering. |
 
 ### Example
 
@@ -52,6 +59,10 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
       "startupCommand": "npm run dev"
     }
   ],
-  "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 2
+  "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 2,
+  "extendedTerminalIntegration.statusBar.filter.mode": "whitelist",
+  "extendedTerminalIntegration.statusBar.filter.items": [
+    "bash"
+  ],
 }
 ```

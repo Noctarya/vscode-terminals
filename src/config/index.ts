@@ -3,6 +3,8 @@ import * as vscode from 'vscode';
 import { IsBoolean, IsInt, Min, Max, IsArray, IsIn, Validator } from 'class-validator';
 import StartupTerminal from './startupTerminal';
 
+export type FilterMode = 'whitelist' | 'blacklist';
+
 export default class Config {
   public readonly maxTerminalIcons: number;
   public readonly showTerminalIndex: boolean;
@@ -10,6 +12,8 @@ export default class Config {
   public readonly preferLatestTerminals: boolean;
   public readonly startupTerminals: StartupTerminal[];
   public readonly refreshTerminalNameInterval: number;
+  public readonly filterMode: FilterMode;
+  public readonly filterItems: string[];
 
   constructor(
     maxTerminalIcons: number,
@@ -17,7 +21,9 @@ export default class Config {
     showTerminalName: boolean,
     preferLatestTerminals: boolean,
     startupTerminals: StartupTerminal[],
-    refreshTerminalNameInterval: number
+    refreshTerminalNameInterval: number,
+    filterMode: FilterMode,
+    filterItems: string[]
   ) {
     this.maxTerminalIcons = maxTerminalIcons;
     this.showTerminalIndex = showTerminalIndex;
@@ -25,5 +31,7 @@ export default class Config {
     this.preferLatestTerminals = preferLatestTerminals;
     this.startupTerminals = startupTerminals;
     this.refreshTerminalNameInterval = refreshTerminalNameInterval;
+    this.filterMode = filterMode;
+    this.filterItems = filterItems;
   }
 }

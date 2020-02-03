@@ -72,6 +72,25 @@
           "markdownDescription": "Time in seconds until the terminal name is updated.",
           "scope": "resource"
         },
+        "extendedTerminalIntegration.statusBar.filter.mode": {
+          "type": "string",
+          "enum": [
+            "whitelist",
+            "blacklist"
+          ],
+          "default": "blacklist",
+          "markdownDescription": "The type of filtering mode.",
+          "scope": "resource"
+        },
+        "extendedTerminalIntegration.statusBar.filter.items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "The items that should be used for filtering.",
+          "scope": "resource"
+        },
         "extendedTerminalIntegration.startupTerminals": {
           "type": "array",
           "default": [],
