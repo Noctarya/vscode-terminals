@@ -24,29 +24,34 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
 
 ### Prefix: extendedTerminalIntegration
 
-| Property                    | Typ                                        | Description                                                                                                                                                                                 |
-| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| maxTerminalIcons            | number                                     | Maximum number of icons displayed.                                                                                                                                                          |
-| preferLatestTerminals       | boolean                                    | Prefer the latest terminals if the maximum number of displayed icons is exceeded.                                                                                                           |
-| showTerminalIndex           | boolean                                    | Shows the terminal index next to the icon in the status bar.                                                                                                                                |
-| showTerminalName            | boolean                                    | Shows the terminal name next to the icon in the status bar.                                                                                                                                 |
-| startupTerminals            | [ { id: string, startupCommand?: string} ] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
-| refreshTerminalNameInterval | number                                     | Time in seconds until the terminal name is updated.                                                                                                                                         |
+| Property         | Typ                                        | Description                                                                                                                                                                                 |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| startupTerminals | [ { id: string, startupCommand?: string} ] | Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup. |
+
+### Prefix: extendedTerminalIntegration.statusBar
+
+| Property                    | Typ     | Description                                                                       |
+| --------------------------- | ------- | --------------------------------------------------------------------------------- |
+| maxTerminalIcons            | number  | Maximum number of icons displayed.                                                |
+| preferLatestTerminals       | boolean | Prefer the latest terminals if the maximum number of displayed icons is exceeded. |
+| showTerminalIndex           | boolean | Shows the terminal index next to the icon in the status bar.                      |
+| showTerminalName            | boolean | Shows the terminal name next to the icon in the status bar.                       |
+| refreshTerminalNameInterval | number  | Time in seconds until the terminal name is updated.                               |
 
 ### Example
 
 ```
 {
-  "extendedTerminalIntegration.maxTerminalIcons": 3,
-  "extendedTerminalIntegration.preferLatestTerminals": true,
-  "extendedTerminalIntegration.showTerminalIndex": false
-  "extendedTerminalIntegration.showTerminalName": false,
+  "extendedTerminalIntegration.statusBar.maxTerminalIcons": 3,
+  "extendedTerminalIntegration.statusBar.preferLatestTerminals": true,
+  "extendedTerminalIntegration.statusBar.showTerminalIndex": false
+  "extendedTerminalIntegration.statusBar.showTerminalName": false,
   "extendedTerminalIntegration.startupTerminals": [
     {
       "id": "devServer",
       "startupCommand": "npm run dev"
     }
   ],
-  "extendedTerminalIntegration.refreshTerminalNameInterval": 2
+  "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": 2
 }
 ```
