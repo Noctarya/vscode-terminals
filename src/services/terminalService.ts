@@ -2,8 +2,13 @@ import * as vscode from 'vscode';
 import StartupTerminal from '../config/startupTerminal';
 import ConfigService from './configService';
 import LoggingService from './loggingService';
+import IndexedTerminal from '../modal/indexedTerminal';
 
 export default class TerminalService {
+  public static getAllTerminals = (): IndexedTerminal[] => {
+    return vscode.window.terminals.map((t, idx) => IndexedTerminal.create(idx + 1, t));
+  };
+
   public static initializeStartupTerminals = () => {
     ConfigService.startupTerminals.forEach(st => TerminalService.openStartupTerminal(st));
   };

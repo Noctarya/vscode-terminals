@@ -5,14 +5,17 @@ import ConfigService from './services/configService';
 import TerminalService from './services/terminalService';
 
 export const activate = (context: vscode.ExtensionContext) => {
-  vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => StatusBarTerminalService.refreshTerminalItems(context));
+  TerminalService.initializeStartupTerminals();
+  StatusBarTerminalService.initializeStatusBarItems(context);
 
-  vscode.window.onDidCloseTerminal(() => StatusBarTerminalService.refreshTerminalItems(context));
+  vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => StatusBarTerminalService.reasignTerminalItems());
+
+  vscode.window.onDidCloseTerminal(() => StatusBarTerminalService.reasignTerminalItems());
 
   vscode.workspace.onDidChangeConfiguration(() => {
     LoggingService.info('Configuration changes detected. Update configuration.');
     ConfigService.refreshConfig();
-    StatusBarTerminalService.refreshTerminalItems(context);
+    StatusBarTerminalService.reasignTerminalItems();
   });
 
   context.subscriptions.push(vscode.commands.registerCommand('extendedTerminalIntegration.createTerminal', () => TerminalService.createTerminal()));
@@ -24,9 +27,6 @@ export const activate = (context: vscode.ExtensionContext) => {
   context.subscriptions.push(
     vscode.commands.registerCommand('extendedTerminalIntegration.closeActiveTerminal', () => TerminalService.closeActiveTerminal())
   );
-
-  TerminalService.initializeStartupTerminals();
-  StatusBarTerminalService.refreshTerminalItems(context);
 };
 
 export const deactivate = () => {};
