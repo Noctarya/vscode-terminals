@@ -15,6 +15,10 @@ export default class IndexedTerminal {
     this._openCommandId = openCommandId;
   }
 
+  public get active(): boolean {
+    return vscode.window.activeTerminal === this._vsTerminal;
+  }
+
   public show(): void {
     this._vsTerminal.show();
   }

@@ -11,7 +11,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   vscode.workspace.onDidChangeConfiguration(() => {
     LoggingService.info('Configuration changes detected. Update configuration.');
     ConfigService.refreshConfig();
-    StatusBarService.reasignTerminalItems();
+    StatusBarService.reasign();
   });
 
   context.subscriptions.push(vscode.commands.registerCommand('extendedTerminalIntegration.createTerminal', () => TerminalService.createTerminal()));

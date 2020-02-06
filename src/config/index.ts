@@ -14,6 +14,7 @@ export default class Config {
   public readonly refreshTerminalNameInterval: number;
   public readonly filterMode: FilterMode;
   public readonly filterItems: string[];
+  public readonly activeTerminalColor: string;
 
   constructor(
     maxTerminalIcons: number,
@@ -23,7 +24,8 @@ export default class Config {
     startupTerminals: StartupTerminal[],
     refreshTerminalNameInterval: number,
     filterMode: FilterMode,
-    filterItems: string[]
+    filterItems: string[],
+    activeTerminalColor: string
   ) {
     this.maxTerminalIcons = maxTerminalIcons;
     this.showTerminalIndex = showTerminalIndex;
@@ -33,5 +35,6 @@ export default class Config {
     this.refreshTerminalNameInterval = refreshTerminalNameInterval;
     this.filterMode = filterMode;
     this.filterItems = filterItems;
+    this.activeTerminalColor = activeTerminalColor;
   }
 }

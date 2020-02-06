@@ -30,6 +30,7 @@ export default class StatusBarTerminalItem {
         ? this._terminal.name
         : ''
     }`;
+    this._item.color = this._terminal.active ? ConfigService.activeTerminalColor : '';
   }
 
   public show(): void {

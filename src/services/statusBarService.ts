@@ -9,18 +9,23 @@ export default class StatusBarService {
   private static refreshIntervalId: NodeJS.Timeout | null = null;
 
   public static initializeStatusBarItems(): void {
-    vscode.window.onDidOpenTerminal(() => StatusBarService.reasignTerminalItems());
-    vscode.window.onDidCloseTerminal(() => StatusBarService.reasignTerminalItems());
+    vscode.window.onDidOpenTerminal(() => StatusBarService.reasign());
+    vscode.window.onDidCloseTerminal(() => StatusBarService.reasign());
+    vscode.window.onDidChangeActiveTerminal(() => StatusBarService.reasign());
     this.refresh();
   }
 
   private static refresh = (): void => {
     if (StatusBarService.refreshIntervalId) clearInterval(StatusBarService.refreshIntervalId);
-    const usedTerminals = StatusBarService.getTerminals();
-    if (StatusBarService.knownTerminalItems.length !== usedTerminals.length) StatusBarService.reasignTerminalItems();
-    else StatusBarService.reasignTerminals(usedTerminals);
+    StatusBarService.reasign();
     StatusBarService.refreshIntervalId = setInterval(StatusBarService.refresh, ConfigService.refreshTerminalNameInterval * 1000);
   };
+
+  public static reasign(): void {
+    const usedTerminals = this.getTerminals();
+    if (this.knownTerminalItems.length !== usedTerminals.length) this.reasignTerminalItems();
+    else this.reasignTerminals(usedTerminals);
+  }
 
   private static getTerminals(): IndexedTerminal[] {
     const allTerminals = TerminalService.allTerminals.filter(t =>
@@ -40,7 +45,7 @@ export default class StatusBarService {
     });
   }
 
-  public static reasignTerminalItems(): void {
+  private static reasignTerminalItems(): void {
     this.knownTerminalItems.forEach(t => t.dispose());
     this.knownTerminalItems = this.getTerminals().map(t => new StatusBarTerminalItem(t));
     this.knownTerminalItems.forEach(i => i.show());
