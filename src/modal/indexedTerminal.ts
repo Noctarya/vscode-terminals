@@ -3,14 +3,16 @@ import * as vscode from 'vscode';
 export default class IndexedTerminal {
   private _index: number;
   private _vsTerminal: vscode.Terminal;
+  private _openCommandId: string;
 
-  public static create(index: number, vsTerminal: vscode.Terminal): IndexedTerminal {
-    return new IndexedTerminal(index, vsTerminal);
+  public static create(index: number, vsTerminal: vscode.Terminal, openCommandId: string): IndexedTerminal {
+    return new IndexedTerminal(index, vsTerminal, openCommandId);
   }
 
-  constructor(index: number, vsTerminal: vscode.Terminal) {
+  constructor(index: number, vsTerminal: vscode.Terminal, openCommandId: string) {
     this._index = index;
     this._vsTerminal = vsTerminal;
+    this._openCommandId = openCommandId;
   }
 
   public show(): void {
@@ -27,5 +29,9 @@ export default class IndexedTerminal {
 
   public get index(): number {
     return this._index;
+  }
+
+  public get openCommandId(): string {
+    return this._openCommandId;
   }
 }

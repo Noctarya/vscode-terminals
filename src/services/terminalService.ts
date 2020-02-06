@@ -3,17 +3,27 @@ import StartupTerminal from '../config/startupTerminal';
 import ConfigService from './configService';
 import LoggingService from './loggingService';
 import IndexedTerminal from '../modal/indexedTerminal';
+import CommandService from './commandService';
 
 export default class TerminalService {
-  public static getAllTerminals = (): IndexedTerminal[] => {
-    return vscode.window.terminals.map((t, idx) => IndexedTerminal.create(idx + 1, t));
-  };
+  private static _allTerminals: IndexedTerminal[] = [];
+  private static _context: vscode.ExtensionContext;
 
-  public static initializeStartupTerminals = () => {
+  public static initializeTerminals(context: vscode.ExtensionContext): void {
+    this._context = context;
+    this.initializeStartupTerminals();
+    this.determineTerminals();
+    vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) =>
+      this._allTerminals.push(this.createAndRegisterNewTerminal(this._allTerminals.length, terminal))
+    );
+    vscode.window.onDidCloseTerminal(() => this.determineTerminals());
+  }
+
+  private static initializeStartupTerminals(): void {
     ConfigService.startupTerminals.forEach(st => TerminalService.openStartupTerminal(st));
-  };
+  }
 
-  private static openStartupTerminal(terminal: StartupTerminal) {
+  private static openStartupTerminal(terminal: StartupTerminal): void {
     if (!vscode.window.terminals.find(t => t.name === terminal.id)) {
       LoggingService.info('Create startup terminal:', terminal);
       const newTerminal = vscode.window.createTerminal(terminal.id);
@@ -23,12 +33,26 @@ export default class TerminalService {
     }
   }
 
-  public static createTerminal() {
+  private static determineTerminals(): void {
+    this._allTerminals = vscode.window.terminals.map((t, idx) => this.createAndRegisterNewTerminal(idx + 1, t));
+  }
+
+  private static createAndRegisterNewTerminal(idx: number, terminal: vscode.Terminal): IndexedTerminal {
+    const commandId = CommandService.getNextAnonymousCommand();
+    this._context.subscriptions.push(
+      vscode.commands.registerCommand(commandId, () => {
+        terminal.show();
+      })
+    );
+    return IndexedTerminal.create(idx, terminal, commandId);
+  }
+
+  public static createTerminal(): void {
     const newTerminal = vscode.window.createTerminal();
     newTerminal.show();
   }
 
-  public static closeActiveTerminal() {
+  public static closeActiveTerminal(): void {
     const terminal = vscode.window.activeTerminal;
     if (terminal) {
       LoggingService.info(`Close active terminal ${terminal.name}`);
@@ -38,10 +62,14 @@ export default class TerminalService {
     }
   }
 
-  public static closeAllTerminals() {
+  public static closeAllTerminals(): void {
     vscode.window.terminals.forEach((t, idx) => {
       LoggingService.info(`Close terminal ${idx + 1}: ${t.name}.`);
       t.dispose();
     });
+  }
+
+  public static get allTerminals(): IndexedTerminal[] {
+    return this._allTerminals;
   }
 }

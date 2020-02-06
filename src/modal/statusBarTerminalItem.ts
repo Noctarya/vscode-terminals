@@ -3,9 +3,6 @@ import ConfigService from '../services/configService';
 import LoggingService from '../services/loggingService';
 import IndexedTerminal from './indexedTerminal';
 
-let curId = 0;
-const getNextCommandId = () => `extendedTerminalIntegration.anonymous-command.${curId++}`;
-
 export default class StatusBarTerminalItem {
   private _item: vscode.StatusBarItem;
   private _terminal: IndexedTerminal;
@@ -13,15 +10,17 @@ export default class StatusBarTerminalItem {
   constructor(terminal: IndexedTerminal) {
     this._item = vscode.window.createStatusBarItem();
     this._terminal = terminal;
-    this.showName();
+    this._item.command = terminal.openCommandId;
+    this.setName();
   }
 
   public set terminal(terminal: IndexedTerminal) {
     this._terminal = terminal;
-    this.showName();
+    this._item.command = terminal.openCommandId;
+    this.setName();
   }
 
-  private showName = () => {
+  private setName(): void {
     this._item.text = `$(terminal)${
       ConfigService.showTerminalIndex && ConfigService.showTerminalName
         ? `${this._terminal.index}: ${this._terminal.name}`
@@ -31,21 +30,10 @@ export default class StatusBarTerminalItem {
         ? this._terminal.name
         : ''
     }`;
-  };
-
-  public registerAndShow(context: vscode.ExtensionContext): void {
-    this.registerCommand(context);
-    this._item.show();
   }
 
-  private registerCommand(context: vscode.ExtensionContext): void {
-    const commandId = getNextCommandId();
-    this._item.command = commandId;
-    context.subscriptions.push(
-      vscode.commands.registerCommand(commandId, () => {
-        this._terminal.show();
-      })
-    );
+  public show(): void {
+    this._item.show();
   }
 
   public dispose(): void {
