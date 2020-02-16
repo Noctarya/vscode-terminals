@@ -13,9 +13,10 @@ export default class TerminalService {
     this._context = context;
     this.initializeStartupTerminals();
     this.determineTerminals();
-    vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) =>
-      this._allTerminals.push(this.createAndRegisterNewTerminal(this._allTerminals.length, terminal))
-    );
+    vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => {
+      const idx = vscode.window.terminals.length;
+      if (this._allTerminals.every(t => t.index !== idx)) this._allTerminals.push(this.createAndRegisterNewTerminal(idx, terminal));
+    });
     vscode.window.onDidCloseTerminal(() => this.determineTerminals());
   }
 
