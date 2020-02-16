@@ -91,13 +91,6 @@
           "markdownDescription": "The items that should be used for filtering.",
           "scope": "resource"
         },
-        "extendedTerminalIntegration.statusBar.activeTerminal.color": {
-          "type": "string",
-          "pattern": "^(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|)$",
-          "default": "#1E1E1E",
-          "markdownDescription": "The color of the active terminal in hexadecimal notation. If no different color is to be used for the active terminal, an empty string must be specified.",
-          "scope": "resource"
-        },
         "extendedTerminalIntegration.startupTerminals": {
           "type": "array",
           "default": [],
@@ -116,7 +109,27 @@
           "scope": "resource"
         }
       }
-    }
+    },
+    "colors": [
+      {
+        "id": "extendedTerminalIntegration.statusBar.activeForeground",
+        "description": "The foreground color of the active statusbar terminal item.",
+        "defaults": {
+          "dark": "list.warningForeground",
+          "light": "errorForeground",
+          "highContrast": "#569CD6"
+        }
+      },
+      {
+        "id": "extendedTerminalIntegration.statusBar.foreground",
+        "description": "The foreground color of the statusbar terminal items.",
+        "defaults": {
+          "dark": "statusBar.foreground",
+          "light": "statusBar.foreground",
+          "highContrast": "statusBar.foreground"
+        }
+      }
+    ]
   },
   "activationEvents": [
     "*"

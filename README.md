@@ -45,11 +45,12 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
 | mode     | 'blacklist' <br/> 'whitelist' | The type of filtering mode.                  |
 | items    | string[]                      | The items that should be used for filtering. |
 
-### Prefix: extendedTerminalIntegration.statusBar.activeTerminal
+### Theming
 
-| Property | Typ                                                            | Description                                                                                                                                               |
-| -------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| color    | #\[A-Fa-f0-9\]{6} <br/> #\[A-Fa-f0-9\]{3} <br/> <EMPTY_STRING> | The color of the active terminal in hexadecimal notation. If no different color is to be used for the active terminal, an empty string must be specified. |
+| ID                                                     | Description                                                 |
+| ------------------------------------------------------ | ----------------------------------------------------------- |
+| extendedTerminalIntegration.statusBar.activeForeground | The foreground color of the active statusbar terminal item. |
+| extendedTerminalIntegration.statusBar.foreground       | The foreground color of the statusbar terminal items.       |
 
 ### Example
 
@@ -70,6 +71,9 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
   "extendedTerminalIntegration.statusBar.filter.items": [
     "bash"
   ],
-  "extendedTerminalIntegration.statusBar.activeTerminal.color": "#ff0000",
+  "workbench.colorCustomizations": {
+    "extendedTerminalIntegration.statusBar.activeForeground": "#0f0",
+    "extendedTerminalIntegration.statusBar.foreground": "#00AA00"
+  }
 }
 ```

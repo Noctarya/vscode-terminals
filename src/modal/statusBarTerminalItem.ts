@@ -30,7 +30,9 @@ export default class StatusBarTerminalItem {
         ? this._terminal.name
         : ''
     }`;
-    this._item.color = this._terminal.active ? ConfigService.activeTerminalColor : '';
+    this._item.color = this._terminal.active
+      ? new vscode.ThemeColor('extendedTerminalIntegration.statusBar.activeForeground')
+      : new vscode.ThemeColor('extendedTerminalIntegration.statusBar.foreground');
   }
 
   public show(): void {

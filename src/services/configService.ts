@@ -25,8 +25,7 @@ export default class ConfigService {
       ConfigService.getAndValidateStartupTerminals(),
       ConfigService.getAndValidateRefreshTerminalNameInterval(),
       ConfigService.getAndValidateFilterMode(),
-      ConfigService.getAndValidateFilterItems(),
-      ConfigService.getAndValidateActiveTerminalColor()
+      ConfigService.getAndValidateFilterItems()
     );
     LoggingService.info('Configuration currently used:', ConfigService.config);
   }
@@ -101,18 +100,6 @@ export default class ConfigService {
     return [];
   }
 
-  private static getAndValidateActiveTerminalColor(): string {
-    const value = getStatusBarConfig('activeTerminal').color;
-    if (ConfigService.validator.isString(value) && (ConfigService.validator.isHexColor(value) || value === '')) return value;
-    LoggingService.warn(
-      'extendedTerminalIntegration.statusBar.activeTerminal.color is not a valid color in hexadecimal notation or an empty string. Use Default instead.',
-      {
-        'extendedTerminalIntegration.statusBar.activeTerminal.color': value
-      }
-    );
-    return '1E1E1E';
-  }
-
   private static getAndValidateStartupTerminals(): StartupTerminal[] {
     const value = getVsConfig('startupTerminals');
     if (ConfigService.validator.isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t))) return value;
@@ -164,9 +151,5 @@ export default class ConfigService {
 
   public static get filterItems(): string[] {
     return ConfigService.config.filterItems;
-  }
-
-  public static get activeTerminalColor(): string {
-    return ConfigService.config.activeTerminalColor;
   }
 }
