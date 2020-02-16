@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Change the prefix of the configuration parameters.
+- Allow multiple commands to be executed when the startupTerminal starts.
 
 ## [0.3.1] - 2020-01-30
 

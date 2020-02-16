@@ -109,9 +109,14 @@
                 "markdownDescription": "The name of the terminal processes. In this context, this is clear in order to prevent an already running process from being started a second time.",
                 "scope": "resource"
               },
-              "startupCommand": {
-                "type": "string",
-                "markdownDescription": "The command to be executed when the process starts. This parameter is optional.",
+              "startupCommands": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "default": [],
+                "markdownDescription": "The commands to be executed when the process starts. This parameter is optional.",
                 "scope": "resource"
               }
             },

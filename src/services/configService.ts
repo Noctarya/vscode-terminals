@@ -102,9 +102,10 @@ export default class ConfigService {
 
   private static getAndValidateStartupTerminals(): StartupTerminal[] {
     const value = getVsConfig('startupTerminals');
-    if (ConfigService.validator.isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t))) return value;
+    if (ConfigService.validator.isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t)))
+      return value.map((t: any) => new StartupTerminal(t.id, t.startupCommands));
     LoggingService.warn(
-      'extendedTerminalIntegration.startupTerminals is not a valid array of { id: string, startupCommand?: string }. Use Default instead.',
+      'extendedTerminalIntegration.startupTerminals is not a valid array of { id: string, startupCommands: string[] }. Use Default instead.',
       {
         'extendedTerminalIntegration.startupTerminals': value
       }
@@ -113,11 +114,11 @@ export default class ConfigService {
   }
 
   private static isValidStartupTerminal(value: StartupTerminal): boolean {
+    const isNotEmptyString = (v: any) => ConfigService.validator.isString(v) && ConfigService.validator.isNotEmpty(v);
     return (
-      ConfigService.validator.isString(value.id) &&
-      ConfigService.validator.isNotEmpty(value.id) &&
-      (value.startupCommand === undefined ||
-        (ConfigService.validator.isString(value.startupCommand) && ConfigService.validator.isNotEmpty(value.startupCommand)))
+      (isNotEmptyString(value.id) && value.startupCommands === undefined) ||
+      (ConfigService.validator.isArray(value.startupCommands) &&
+        (value.startupCommands.length === 0 || value.startupCommands.every(isNotEmptyString)))
     );
   }
 
