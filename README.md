@@ -40,10 +40,10 @@ The VS Code identifier of the extension has changed from version 0.2.0 to 0.3.0.
 
 ### Prefix: extendedTerminalIntegration.statusBar.filter
 
-| Property | Typ                           | Description                                  |
-| -------- | ----------------------------- | -------------------------------------------- |
-| mode     | 'blacklist' <br/> 'whitelist' | The type of filtering mode.                  |
-| items    | string[]                      | The items that should be used for filtering. |
+| Property | Typ                           | Description                                                  |
+| -------- | ----------------------------- | ------------------------------------------------------------ |
+| mode     | 'blacklist' <br/> 'whitelist' | The type of filtering mode.                                  |
+| items    | string[]                      | The names of the terminal that should be used for filtering. |
 
 ### Theming
 

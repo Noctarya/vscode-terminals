@@ -46,13 +46,16 @@
         "extendedTerminalIntegration.statusBar.maxTerminalIcons": {
           "type": "number",
           "default": 15,
+          "minimum": 0,
+          "maximum": 99,
           "markdownDescription": "Maximum number of icons displayed.",
           "scope": "resource"
         },
         "extendedTerminalIntegration.statusBar.preferLatestTerminals": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Prefer the latest terminals if the maximum number of displayed icons is exceeded."
+          "markdownDescription": "Prefer the latest terminals if the maximum number of displayed icons is exceeded.",
+          "scope": "resource"
         },
         "extendedTerminalIntegration.statusBar.showTerminalIndex": {
           "type": "boolean",
@@ -69,6 +72,8 @@
         "extendedTerminalIntegration.statusBar.refreshTerminalNameInterval": {
           "type": "number",
           "default": 5,
+          "minimum": 1,
+          "maximum": 600,
           "markdownDescription": "Time in seconds until the terminal name is updated.",
           "scope": "resource"
         },
@@ -85,26 +90,35 @@
         "extendedTerminalIntegration.statusBar.filter.items": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "default": [],
-          "markdownDescription": "The items that should be used for filtering.",
+          "markdownDescription": "The names of the terminal that should be used for filtering.",
           "scope": "resource"
         },
         "extendedTerminalIntegration.startupTerminals": {
           "type": "array",
           "default": [],
-          "properties": {
-            "id": {
-              "type": "string"
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "markdownDescription": "The name of the terminal processes. In this context, this is clear in order to prevent an already running process from being started a second time.",
+                "scope": "resource"
+              },
+              "startupCommand": {
+                "type": "string",
+                "markdownDescription": "The command to be executed when the process starts. This parameter is optional.",
+                "scope": "resource"
+              }
             },
-            "startupCommand": {
-              "type": "string"
-            }
+            "required": [
+              "id"
+            ]
           },
-          "required": [
-            "id"
-          ],
           "markdownDescription": "Defines a list of terminals to be opened when vscode is started. Each terminal must have an id, which is treated as a terminal name and, optionally, a command that is executed at startup.",
           "scope": "resource"
         }
