@@ -5,6 +5,12 @@ All notable changes to the "Extended Terminal Integration" extension will be doc
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2020-05-16
+
+### Fixed
+
+- Updating vulnerable dependency (acorn from 7.1.0 to 7.1.1)
+
 ## [0.4.0] - 2020-02-17
 
 ### Added
@@ -24,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add a configuration option to customize the interval that updates the name of the displayed terminal processes in the status bar.
 
-## Fixed
+### Fixed
 
 - Update the name of the displayed terminal processes in the status bar.
 
