@@ -15,20 +15,20 @@ export default class TerminalService {
     this.determineTerminals();
     vscode.window.onDidOpenTerminal((terminal: vscode.Terminal) => {
       const idx = vscode.window.terminals.length;
-      if (this._allTerminals.every(t => t.index !== idx)) this._allTerminals.push(this.createAndRegisterNewTerminal(idx, terminal));
+      if (this._allTerminals.every((t) => t.index !== idx)) this._allTerminals.push(this.createAndRegisterNewTerminal(idx, terminal));
     });
     vscode.window.onDidCloseTerminal(() => this.determineTerminals());
   }
 
   private static initializeStartupTerminals(): void {
-    ConfigService.startupTerminals.forEach(st => TerminalService.openStartupTerminal(st));
+    ConfigService.startupTerminals.forEach((st) => TerminalService.openStartupTerminal(st));
   }
 
   private static openStartupTerminal(terminal: StartupTerminal): void {
-    if (!vscode.window.terminals.find(t => t.name === terminal.id)) {
+    if (!vscode.window.terminals.find((t) => t.name === terminal.id)) {
       LoggingService.info('Create startup terminal:', terminal);
       const newTerminal = vscode.window.createTerminal(terminal.id);
-      terminal.startupCommands.forEach(c => newTerminal.sendText(c));
+      terminal.startupCommands.forEach((c) => newTerminal.sendText(c));
     } else {
       LoggingService.warn(`A terminal process with the name ${terminal.id} already exists. The following terminal is not created:`, terminal);
     }

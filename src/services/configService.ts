@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { validate, Validator } from 'class-validator';
+import { isInt, isBoolean, min, max, isArray, isString, isNotEmpty } from 'class-validator';
 import LoggingService from './loggingService';
 import Config, { FilterMode } from '../config';
 import StartupTerminal from '../config/startupTerminal';
@@ -8,11 +8,9 @@ const getVsConfig = (property: string) => vscode.workspace.getConfiguration('ext
 const getStatusBarConfig = (property: string) => getVsConfig('statusBar')[property];
 
 export default class ConfigService {
-  private static validator: Validator;
   private static config: Config;
 
   private static _initialize = (() => {
-    ConfigService.validator = new Validator();
     ConfigService.refreshConfig();
   })();
 
@@ -32,7 +30,7 @@ export default class ConfigService {
 
   private static getAndValidateMaxTerminalIcons(): number {
     const value = getStatusBarConfig('maxTerminalIcons');
-    if (ConfigService.validator.isInt(value) && ConfigService.validator.min(value, 0) && ConfigService.validator.max(value, 99)) return value;
+    if (isInt(value) && min(value, 0) && max(value, 99)) return value;
     LoggingService.warn('extendedTerminalIntegration.statusBar.maxTerminalIcons is not a valid number between 0 and 99. Use Default instead.', {
       'extendedTerminalIntegration.statusBar.maxTerminalIcons': value
     });
@@ -41,7 +39,7 @@ export default class ConfigService {
 
   private static getAndValidateShowTerminalIndex(): boolean {
     const value = getStatusBarConfig('showTerminalIndex');
-    if (ConfigService.validator.isBoolean(value)) return value;
+    if (isBoolean(value)) return value;
     LoggingService.warn('extendedTerminalIntegration.statusBar.showTerminalIndex is not a valid boolean. Use Default instead.', {
       'extendedTerminalIntegration.statusBar.showTerminalIndex': value
     });
@@ -50,7 +48,7 @@ export default class ConfigService {
 
   private static getAndValidateShowTerminalName(): boolean {
     const value = getStatusBarConfig('showTerminalName');
-    if (ConfigService.validator.isBoolean(value)) return value;
+    if (isBoolean(value)) return value;
     LoggingService.warn('extendedTerminalIntegration.statusBar.showTerminalName is not a valid boolean. Use Default instead.', {
       'extendedTerminalIntegration.statusBar.showTerminalName': value
     });
@@ -59,7 +57,7 @@ export default class ConfigService {
 
   private static getAndValidatePreferLatestTerminals(): boolean {
     const value = getStatusBarConfig('preferLatestTerminals');
-    if (ConfigService.validator.isBoolean(value)) return value;
+    if (isBoolean(value)) return value;
     LoggingService.warn('extendedTerminalIntegration.statusBar.preferLatestTerminals is not a valid boolean. Use Default instead.', {
       'extendedTerminalIntegration.statusBar.preferLatestTerminals': value
     });
@@ -68,7 +66,7 @@ export default class ConfigService {
 
   private static getAndValidateRefreshTerminalNameInterval(): number {
     const value = getStatusBarConfig('refreshTerminalNameInterval');
-    if (ConfigService.validator.isInt(value) && ConfigService.validator.min(value, 1) && ConfigService.validator.max(value, 600)) return value;
+    if (isInt(value) && min(value, 1) && max(value, 600)) return value;
     LoggingService.warn(
       'extendedTerminalIntegration.statusBar.refreshTerminalNameInterval is not a valid number between 1 and 600. Use Default instead.',
       {
@@ -89,11 +87,7 @@ export default class ConfigService {
 
   private static getAndValidateFilterItems(): string[] {
     const value = getStatusBarConfig('filter').items;
-    if (
-      ConfigService.validator.isArray(value) &&
-      value.every((i: any) => ConfigService.validator.isString(i) && ConfigService.validator.isNotEmpty(i))
-    )
-      return value;
+    if (isArray(value) && value.every((i: any) => isString(i) && isNotEmpty(i))) return value;
     LoggingService.warn('extendedTerminalIntegration.statusBar.filter.items is not a valid array of strings. Use Default instead.', {
       'extendedTerminalIntegration.statusBar.filter.items': value
     });
@@ -102,7 +96,7 @@ export default class ConfigService {
 
   private static getAndValidateStartupTerminals(): StartupTerminal[] {
     const value = getVsConfig('startupTerminals');
-    if (ConfigService.validator.isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t)))
+    if (isArray(value) && value.every((t: any) => ConfigService.isValidStartupTerminal(t)))
       return value.map((t: any) => new StartupTerminal(t.id, t.startupCommands));
     LoggingService.warn(
       'extendedTerminalIntegration.startupTerminals is not a valid array of { id: string, startupCommands: string[] }. Use Default instead.',
@@ -114,11 +108,10 @@ export default class ConfigService {
   }
 
   private static isValidStartupTerminal(value: StartupTerminal): boolean {
-    const isNotEmptyString = (v: any) => ConfigService.validator.isString(v) && ConfigService.validator.isNotEmpty(v);
+    const isNotEmptyString = (v: any) => isString(v) && isNotEmpty(v);
     return (
       (isNotEmptyString(value.id) && value.startupCommands === undefined) ||
-      (ConfigService.validator.isArray(value.startupCommands) &&
-        (value.startupCommands.length === 0 || value.startupCommands.every(isNotEmptyString)))
+      (isArray(value.startupCommands) && (value.startupCommands.length === 0 || value.startupCommands.every(isNotEmptyString)))
     );
   }
 

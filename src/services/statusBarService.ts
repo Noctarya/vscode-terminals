@@ -6,6 +6,7 @@ import IndexedTerminal from '../modal/indexedTerminal';
 
 export default class StatusBarService {
   private static knownTerminalItems: StatusBarTerminalItem[] = [];
+  // eslint-disable-next-line no-undef
   private static refreshIntervalId: NodeJS.Timeout | null = null;
 
   public static initializeStatusBarItems(): void {
@@ -28,7 +29,7 @@ export default class StatusBarService {
   }
 
   private static getTerminals(): IndexedTerminal[] {
-    const allTerminals = TerminalService.allTerminals.filter(t =>
+    const allTerminals = TerminalService.allTerminals.filter((t) =>
       ConfigService.filterMode === 'blacklist' ? !ConfigService.filterItems.includes(t.name) : ConfigService.filterItems.includes(t.name)
     );
     return allTerminals.length <= ConfigService.maxTerminalIcons
@@ -46,8 +47,8 @@ export default class StatusBarService {
   }
 
   private static reasignTerminalItems(): void {
-    this.knownTerminalItems.forEach(t => t.dispose());
-    this.knownTerminalItems = this.getTerminals().map(t => new StatusBarTerminalItem(t));
-    this.knownTerminalItems.forEach(i => i.show());
+    this.knownTerminalItems.forEach((t) => t.dispose());
+    this.knownTerminalItems = this.getTerminals().map((t) => new StatusBarTerminalItem(t));
+    this.knownTerminalItems.forEach((i) => i.show());
   }
 }
