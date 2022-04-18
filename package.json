@@ -1,6 +1,6 @@
 {
   "name": "terminals",
-  "version": "0.4.3-dev",
+  "version": "0.4.3",
   "publisher": "Noctarya",
   "engines": {
     "vscode": "^1.66.0"
