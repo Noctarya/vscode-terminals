@@ -180,6 +180,6 @@
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "class-validator": "^0.13.2"
+    "class-validator": "^0.14.0"
   }
 }
